@@ -1,0 +1,83 @@
+.header {
+  background-color: rgb(80, 10, 80);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  color: pink;
+  margin: 0;
+}
+
+.contenedorBotones {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button {
+  background-color: pink;
+  color: rgb(202, 41, 202);
+  border: none;
+  padding: 8px 16px;
+  margin-right: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.navigation {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  margin-right: 10px;
+  color: pink;
+}
+
+.nav-item:last-child {
+  margin-right: 0;
+}
+
+.contCatalogo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  width: 250px;
+  margin: 10px;
+  padding: 20px;
+  background-color: rgb(80, 10, 80);
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.nombre {
+  font-size: 18px;
+  font-weight: bold;
+  color: pink;
+}
+
+.precio {
+  font-size: 16px;
+  color: pink;
+}
+
+.categoria {
+  font-size: 14px;
+  color: pink;
+  margin-bottom: 10px;
+}
+
+.img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+
