@@ -154,7 +154,7 @@ function guardarCarritoEnLocalStorage() {
 }
 window.addEventListener("beforeunload", guardarCarritoEnLocalStorage);
 
-// Cargar carrito desde el localStorage al cargar la página
+
 function cargarCarritoDesdeLocalStorage() {
   if (localStorage.getItem("carrito")) {
     carrito = JSON.parse(localStorage.getItem("carrito"));
@@ -162,7 +162,7 @@ function cargarCarritoDesdeLocalStorage() {
   }
 }
 
-// Actualizar el carrito en el DOM
+
 function actualizarCarrito() {
   seccionCarrito.innerHTML = "";
 
