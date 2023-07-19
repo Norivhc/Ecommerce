@@ -7,8 +7,8 @@ async function fetchData() {
     console.log(data);
 
     const btns = document.querySelectorAll("button");
-    btns.forEach((button) => {
-      button.addEventListener("click", (e) => {
+    btns.forEach((buttonElement) => {
+      buttonElement.addEventListener("click", (e) => {
         const categoria = e.target.innerText;
         if (categoria === "Todos") {
           crearCatalogo(data);
@@ -29,14 +29,31 @@ async function fetchData() {
 
 fetchData();
 
-const body = document.querySelector("body");
-const divTotal = document.querySelector(".total")
+const divTotal = document.querySelector(".total");
+const catalogoContenedor = document.querySelector(".catalogo");
+const seccionCarritoContenedor = document.querySelector(".carrito");
 
 const contCatalogo = document.createElement("div");
 contCatalogo.classList.add("contCatalogo");
-body.appendChild(contCatalogo);
 
-const seccionCarrito = document.querySelector(".carrito");
+catalogoContenedor.appendChild(contCatalogo);
+
+document.getElementById("botonCompletarCompra").addEventListener("click", function () {
+  Toastify({
+    text: "This is a toast",
+    duration: 3000,
+    destination: "https://github.com/apvarun/toastify-js",
+    newWindow: true,
+    close: true,
+    gravity: "top", // `top` or `bottom`
+    position: "left", // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+      background: "linear-gradient(to right, #00b09b, #96c93d)",
+    },
+    onClick: function () {}, // Callback after click
+  }).showToast();
+});
 
 function crearCatalogo(array) {
   contCatalogo.innerHTML = "";
@@ -72,23 +89,16 @@ function crearCatalogo(array) {
     botonCompra.innerText = "Agregar al carrito";
 
     botonCompra.addEventListener("click", (e) => {
-      const indiceProducto = carrito.findIndex(
-        (item) => item.nombre === producto.nombre
-      );
+      const indiceProducto = carrito.findIndex((item) => item.nombre === producto.nombre);
 
       if (indiceProducto !== -1) {
         carrito[indiceProducto].cantidad++;
 
-        const cantidadProductoCarrito = document.querySelector(
-          `#cantidadProductoCarrito-${indiceProducto}`
-        );
-        const subtotalCarrito = document.querySelector(
-          `#subtotal-${indiceProducto}`
-        );
+        const cantidadProductoCarrito = document.querySelector(`#cantidadProductoCarrito-${indiceProducto}`);
+        const subtotalCarrito = document.querySelector(`#subtotal-${indiceProducto}`);
 
         if (cantidadProductoCarrito) {
-          let subtotal =
-            carrito[indiceProducto].cantidad * carrito[indiceProducto].precio;
+          let subtotal = carrito[indiceProducto].cantidad * carrito[indiceProducto].precio;
           carrito[indiceProducto].subtotal = subtotal;
           cantidadProductoCarrito.innerText = `cantidad: ${carrito[indiceProducto].cantidad}`;
           subtotalCarrito.innerText = `subtotal: ${subtotal}`;
@@ -106,7 +116,7 @@ function crearCatalogo(array) {
 
         const productoCarrito = document.createElement("div");
         productoCarrito.classList.add("producto-carrito");
-        seccionCarrito.appendChild(productoCarrito);
+        seccionCarritoContenedor.appendChild(productoCarrito);
 
         const nombreCarrito = document.createElement("p");
         nombreCarrito.classList.add("nombre-carrito");
@@ -154,7 +164,6 @@ function guardarCarritoEnLocalStorage() {
 }
 window.addEventListener("beforeunload", guardarCarritoEnLocalStorage);
 
-
 function cargarCarritoDesdeLocalStorage() {
   if (localStorage.getItem("carrito")) {
     carrito = JSON.parse(localStorage.getItem("carrito"));
@@ -162,14 +171,12 @@ function cargarCarritoDesdeLocalStorage() {
   }
 }
 
-
 function actualizarCarrito() {
-  seccionCarrito.innerHTML = "";
-
+  seccionCarritoContenedor.innerHTML = "";
   carrito.forEach((producto, index) => {
     const productoCarrito = document.createElement("div");
     productoCarrito.classList.add("producto-carrito");
-    seccionCarrito.appendChild(productoCarrito);
+    seccionCarritoContenedor.appendChild(productoCarrito);
 
     const nombreCarrito = document.createElement("p");
     nombreCarrito.classList.add("nombre-carrito");
@@ -192,7 +199,38 @@ function actualizarCarrito() {
   actualizarTotal();
 }
 
+const botonVaciar = document.querySelector(".botonVaciar");
+botonVaciar.addEventListener("click", () => {
+  carrito = [];
+  seccionCarritoContenedor.innerHTML = "";
+  actualizarTotal();
+});
 
 window.addEventListener("DOMContentLoaded", cargarCarritoDesdeLocalStorage);
 
+const formulario = document.getElementById('miFormulario');
 
+    
+    formulario.addEventListener('submit', function(event) {
+      event.preventDefault(); 
+
+      
+      const nombre = document.getElementById('nombre').value;
+      const email = document.getElementById('email').value;
+      const mensaje = document.getElementById('mensaje').value;
+
+      
+
+    
+      console.log('Nombre:', nombre);
+      console.log('Email:', email);
+      console.log('Mensaje:', mensaje);
+
+      const resultado = document.createElement("div");
+      resultado.innerText = `Nombre:${nombre} Email:${email} Mensaje:${mensaje}`
+      const resultadoContainer = document.querySelector(".resultado")
+      resultadoContainer.appendChild(resultado)
+
+     
+      formulario.reset();
+    });
