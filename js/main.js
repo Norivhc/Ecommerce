@@ -1,3 +1,5 @@
+const carrito = [];
+
 async function fetchData() {
   try {
     const response = await fetch("js/productos.JSON");
@@ -32,6 +34,8 @@ const contCatalogo = document.createElement("div");
 contCatalogo.classList.add("contCatalogo")
 body.appendChild(contCatalogo);
 
+const seccionCarrito = document.querySelector(".carrito")
+
 function crearCatalogo(array) {
   contCatalogo.innerHTML = ""; 
 
@@ -56,8 +60,43 @@ function crearCatalogo(array) {
     imagen.src = producto.img;
     imagen.classList.add("img");
     card.appendChild(imagen)
+
+    const botonCompra = document.createElement("button")
+    botonCompra.classList.add("botonCompra")
+    card.appendChild(botonCompra)
+    botonCompra.innerText = "Agregar al carrito"
+
+    botonCompra.addEventListener("click", (e) => {
+      const indiceProducto = carrito.findIndex(item => item.nombre === producto.nombre);
+      if (indiceProducto !== -1) {
+        // Object with the same name already exists, increase cantidad
+        carrito[indiceProducto].cantidad++;
+    
+        const cantidadProductoCarrito = document.querySelector(`#cantidadProductoCarrito-${indiceProducto}`);
+        if (cantidadProductoCarrito) {
+          cantidadProductoCarrito.innerText = carrito[indiceProducto].cantidad;
+        }
+      } else {
+        // Object doesn't exist, add new object to the carrito array
+        carrito.push({
+          nombre: producto.nombre,
+          cantidad: 1
+        });
+    
+        const nuevoIndiceProducto = carrito.length - 1;
+    
+        const nombreCarrito = document.createElement("p");
+        nombreCarrito.innerText = producto.nombre;
+        seccionCarrito.appendChild(nombreCarrito);
+    
+        const cantidadProductoCarrito = document.createElement("p");
+        cantidadProductoCarrito.id = `cantidadProductoCarrito-${nuevoIndiceProducto}`;
+        cantidadProductoCarrito.innerText = carrito[nuevoIndiceProducto].cantidad;
+        seccionCarrito.appendChild(cantidadProductoCarrito);
+      }
+    });
+  })
   }
-  )}
 
 
 
