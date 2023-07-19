@@ -80,4 +80,56 @@
   margin-bottom: 10px;
 }
 
+.nombre-carrito {
+  color: violet;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
 
+.cantidad-carrito {
+  color: white;
+  font-size: 14px;
+}
+
+.subtotal-carrito {
+  color: violet;
+  font-size: 14px;
+}
+
+.carrito {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 30px;
+  border: 2px black solid;
+  flex-wrap: wrap;
+  background-color: #ffcaff;
+
+  border-radius: 10px;
+}
+
+.nombre-carrito {
+  font-family: 'Cherry Swash', cursive;
+  text-transform: uppercase;
+}
+
+.subtotal-carrito {
+  font-family: 'Arial', sans-serif;
+  font-style: italic;
+}
+
+.producto-carrito {
+  background-color: #F4F2FF; 
+  border-radius: 8px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  padding: 20px; 
+ color: #333; 
+  font-family: Arial, sans-serif;
+}
+
+.total {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
