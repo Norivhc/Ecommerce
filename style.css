@@ -1,3 +1,8 @@
+body {
+  font-family: 'Quicksand', sans-serif;
+  background-color: #f8f5f9;
+  color: #333;
+}
 .header {
   background-color: rgb(80, 10, 80);
   padding: 20px;
@@ -88,7 +93,7 @@
 }
 
 .cantidad-carrito {
-  color: white;
+  color: black;
   font-size: 14px;
 }
 
@@ -108,7 +113,9 @@
 
   border-radius: 10px;
 }
-
+.carrito-contenido {
+  display: flex;
+}
 .nombre-carrito {
   font-family: 'Cherry Swash', cursive;
   text-transform: uppercase;
@@ -132,4 +139,53 @@
   display: flex;
   justify-content: center;
   align-content: center;
+}
+.formulario {
+  width: 80%;
+  font-weight: 500;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f7e0f0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.formulario label {
+  display: block;
+  font-size: 18px;
+  color: #8b5a90;
+}
+
+.formulario input,
+.formulario textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #e6c0de;
+  border-radius: 5px;
+}
+
+.formulario textarea {
+  resize: vertical;
+}
+
+.formulario .enviar-btn {
+  background-color: #b35499;
+  color: #fff;
+  font-size: 18px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.formulario .enviar-btn:hover {
+  background-color: #a0468c;
+}
+
+
+.resultado {
+  font-size: 18px;
+  color: #8b5a90;
+  margin-top: 20px;
 }

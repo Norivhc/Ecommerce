@@ -1,4 +1,6 @@
 let carrito = [];
+let catalogo = [];
+let catalogoGenerado = false;
 
 async function fetchData() {
   try {
@@ -6,7 +8,7 @@ async function fetchData() {
     const data = await response.json();
     console.log(data);
 
-    const btns = document.querySelectorAll("button");
+    const btns = document.querySelectorAll(".button");
     btns.forEach((buttonElement) => {
       buttonElement.addEventListener("click", (e) => {
         const categoria = e.target.innerText;
@@ -21,7 +23,11 @@ async function fetchData() {
       });
     });
 
-    crearCatalogo(data);
+    
+    if (!catalogoGenerado) {
+      crearCatalogo(data);
+      catalogoGenerado = true;
+    }
   } catch (error) {
     console.error("Error:", error);
   }
@@ -31,7 +37,7 @@ fetchData();
 
 const divTotal = document.querySelector(".total");
 const catalogoContenedor = document.querySelector(".catalogo");
-const seccionCarritoContenedor = document.querySelector(".carrito");
+const seccionCarritoContenedor = document.querySelector(".carrito-contenido");
 
 const contCatalogo = document.createElement("div");
 contCatalogo.classList.add("contCatalogo");
@@ -39,26 +45,35 @@ contCatalogo.classList.add("contCatalogo");
 catalogoContenedor.appendChild(contCatalogo);
 
 document.getElementById("botonCompletarCompra").addEventListener("click", function () {
+  if (carrito.length > 0) {
   Toastify({
-    text: "This is a toast",
+    text: "Compra completada. Gracias por tu compra.",
     duration: 3000,
     destination: "https://github.com/apvarun/toastify-js",
     newWindow: true,
     close: true,
-    gravity: "top", // `top` or `bottom`
-    position: "left", // `left`, `center` or `right`
-    stopOnFocus: true, // Prevents dismissing of toast on hover
+    gravity: "top",
+    position: "left",
+    stopOnFocus: true, 
     style: {
-      background: "linear-gradient(to right, #00b09b, #96c93d)",
+      background: "linear-gradient(to right, #e6c0de, #b35499)",
     },
-    onClick: function () {}, // Callback after click
+    onClick: function () {},
   }).showToast();
+
+  
+  carrito = [];
+  seccionCarritoContenedor.innerHTML = "";
+  actualizarTotal();
+}
 });
 
+
 function crearCatalogo(array) {
-  contCatalogo.innerHTML = "";
+  contCatalogo.innerHTML = ""
 
   array.forEach((producto) => {
+    catalogo.push(producto)
     const card = document.createElement("div");
     card.classList.add("card");
     contCatalogo.appendChild(card);
@@ -202,7 +217,7 @@ function actualizarCarrito() {
 const botonVaciar = document.querySelector(".botonVaciar");
 botonVaciar.addEventListener("click", () => {
   carrito = [];
-  seccionCarritoContenedor.innerHTML = "";
+  seccionCarritoContenedor.innerHTML = ""
   actualizarTotal();
 });
 
@@ -210,27 +225,21 @@ window.addEventListener("DOMContentLoaded", cargarCarritoDesdeLocalStorage);
 
 const formulario = document.getElementById('miFormulario');
 
-    
-    formulario.addEventListener('submit', function(event) {
-      event.preventDefault(); 
+formulario.addEventListener('submit', function(event) {
+  event.preventDefault(); 
 
-      
-      const nombre = document.getElementById('nombre').value;
-      const email = document.getElementById('email').value;
-      const mensaje = document.getElementById('mensaje').value;
+  const nombre = document.getElementById('nombre').value;
+  const email = document.getElementById('email').value;
+  const mensaje = document.getElementById('mensaje').value;
 
-      
+  console.log('Nombre:', nombre);
+  console.log('Email:', email);
+  console.log('Mensaje:', mensaje);
 
-    
-      console.log('Nombre:', nombre);
-      console.log('Email:', email);
-      console.log('Mensaje:', mensaje);
+  const resultado = document.createElement("div");
+  resultado.innerText = `Nombre:${nombre} Email:${email} Mensaje:${mensaje}`;
+  const resultadoContainer = document.querySelector(".resultado");
+  resultadoContainer.appendChild(resultado);
 
-      const resultado = document.createElement("div");
-      resultado.innerText = `Nombre:${nombre} Email:${email} Mensaje:${mensaje}`
-      const resultadoContainer = document.querySelector(".resultado")
-      resultadoContainer.appendChild(resultado)
-
-     
-      formulario.reset();
-    });
+  formulario.reset();
+});
